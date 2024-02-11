@@ -14,6 +14,13 @@ let APP_ID = AGORA_APP_ID;
 let token = null;
 let uid = String(Math.floor(Math.random()*10000));
 
+let queryString = window.location.search;
+let queryParams = new URLSearchParams(queryString);
+let roomId = queryParams.get("room");
+
+if(!roomId){
+    window.location = `lobby.html`;
+}
 
 // Setting the stun servers 
 let servers = {
@@ -31,7 +38,7 @@ let init = async() => {
     client = await AgoraRTM.createInstance(APP_ID);
     await client.login({uid, token});
 
-    channel = await client.createChannel("master");
+    channel = await client.createChannel(roomId);
     await channel.join();
 
     channel.on("MemberJoined", handleMemberJoined);

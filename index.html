@@ -11,9 +11,23 @@
         <video class="mediaPlayer" id="current-user" autoplay playsinline></video>
         <video class="mediaPlayer" id="remote-user" autoplay playsinline></video>
     </div>
+
+    <div class="controls" id = "controls">
+        <div class="control-container" id="camera-btn">
+            <i class="fa fa-camera"></i>
+        </div>
+        <div class="control-container" id="mic-btn">
+            <i class="fa fa-microphone"></i>
+        </div>
+        <div class="control-container" id="disconnect-btn">
+            <i class="fa fa-phone-slash" style="transform: rotateY(180deg);"></i>
+        </div>
+    </div>
+
     <!-- <script src="agora-rtm-2.1.7.min.js"></script> -->
     <script src="agora-rtm-sdk-1.5.1.js"></script>
     <script type="module" src="env.js" ></script>
     <script type="module" src="main.js"></script>
+    <script src="https://kit.fontawesome.com/e52ccff132.js" crossorigin="anonymous"></script>
 </body>
 </html>
