@@ -1,0 +1,14 @@
+#mediaPlayers{
+    display : grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+}
+
+.mediaPlayer{
+    background-color: black;
+    width : 100%;
+}
+
+#remote-user{
+    display: none;
+}
