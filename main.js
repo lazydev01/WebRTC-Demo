@@ -160,6 +160,38 @@ let leaveChannel = async () => {
     await client.logout();
 }
 
+let toggleCamera = async() => {
+    let videoTrack = currentUserStream.getTracks().find(track=> track.kind === 'video');
+
+    if(videoTrack.enabled){
+        videoTrack.enabled = false;
+        document.getElementById("camera-btn").style.backgroundColor = "white";
+        document.getElementsByClassName("fa-camera")[0].style.color = "black";
+    }
+    else{
+        videoTrack.enabled = true;
+        document.getElementById("camera-btn").style.backgroundColor = "black";
+        document.getElementsByClassName("fa-camera")[0].style.color = "white";
+    }
+}
+
+let toggleMic = async() => {
+    let audioTrack = currentUserStream.getTracks().find(track=> track.kind === 'audio');
+
+    if(audioTrack.enabled){
+        audioTrack.enabled = false;
+        document.getElementById("mic-btn").style.backgroundColor = "white";
+        document.getElementsByClassName("fa-microphone")[0].style.color = "black";
+    }
+    else{
+        audioTrack.enabled = true;
+        document.getElementById("mic-btn").style.backgroundColor = "black";
+        document.getElementsByClassName("fa-microphone")[0].style.color = "white";
+    }
+}
+
 window.addEventListener("beforeunload", leaveChannel);
+document.getElementById("camera-btn").addEventListener("click", toggleCamera);
+document.getElementById("mic-btn").addEventListener("click", toggleMic);
 
 init();
