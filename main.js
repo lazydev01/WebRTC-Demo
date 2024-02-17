@@ -31,6 +31,22 @@ let servers = {
     ]
 }
 
+let constraints = {
+    video : {
+       width : {
+        min : 640,
+        ideal : 1920,
+        max : 1920 
+       },
+       height : {
+        min : 480,
+        ideal : 1080,
+        max : 1080
+       }
+    },
+    audio : true
+}
+
 let init = async() => {
 
     //Initializing client and channel from Agora Real-Time Messaging (RTM)
@@ -47,7 +63,7 @@ let init = async() => {
 
     client.on('MessageFromPeer', handleMessageFromPeer)
 
-    currentUserStream = await navigator.mediaDevices.getUserMedia({video : true, audio : true});
+    currentUserStream = await navigator.mediaDevices.getUserMedia(constraints);
     let currentUserMediaPlayer = document.getElementById("current-user");
     if(currentUserMediaPlayer){
         currentUserMediaPlayer.srcObject = currentUserStream;
@@ -67,9 +83,21 @@ let handleMemberLeft = (userId) => {
     if(remoteUserMediaPlayer){
         remoteUserMediaPlayer.style.display = "none";
     }
+    else{
+        console.err("Cannot detect Remote User's properties!")
+    }
+    let currentUserMediaPlayer = document.getElementById("current-user");
+    if(currentUserMediaPlayer){
+        currentUserMediaPlayer.classList.remove("smallFrame");
+    }
+    else{
+        console.err("Cannot detect Current User's properties!")
+    }
 }
 
 let handleMessageFromPeer = async(message, userId) => {
+    
+    
     message = JSON.parse(message.text);
 
     if(message.type === "offer"){
@@ -97,6 +125,13 @@ let createPeerConnection = async(userId) => {
     }
     else{
         console.err("Cannot detect Remote User's properties!")
+    }
+    let currentUserMediaPlayer = document.getElementById("current-user");
+    if(currentUserMediaPlayer){
+        currentUserMediaPlayer.classList.add("smallFrame");
+    }
+    else{
+        console.err("Cannot detect Current User's properties!");
     }
 
     if(!currentUserStream){

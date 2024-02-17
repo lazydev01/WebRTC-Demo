@@ -7,10 +7,22 @@
     <link rel="stylesheet" href="lobby.css">
 </head>
 <body>
-    <form id = "join-room-form">
-        <input type="text" name="room-name"/>
-        <input type="submit" value="Join Room"/>
-    </form>
+
+    <main id="lobby-container">
+        <div id="form-container">
+            <div id="form-container-header">
+                👋 Create or Join a Room
+            </div>
+            <div id="form-content-wrapper">
+                <form id = "join-room-form">
+                    <input type="text" name="room-name"/>
+                    <input type="submit" value="Join Room"/>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    
     <script src = "lobby.js"></script>
 </body>
 </html>
